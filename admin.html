@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<link rel="stylesheet"
+	href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+<script
+	src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+</head>
+
+<style type="text/css">
+.request_table_container {
+	margin-top: 10px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 30px;
+}
+</style>
+
+<script>
+	angular.module("myapp", []).controller("RequestsController",
+			function($scope, $http) {
+				$scope.data = {};
+				$scope.page = 0;
+
+				updateTable($scope, $http);
+
+				$scope.previousRequests = function() {
+					$scope.page = $scope.page - 1;
+					updateTable($scope, $http);
+				};
+				
+				$scope.nextRequests = function() {
+					$scope.page = $scope.page + 1;
+					updateTable($scope, $http);
+				};
+
+			});
+
+	function updateTable(scope, http) {
+		var responsePromise = http.get("requests.json?page=" + scope.page);
+
+		responsePromise.success(function(data, status, headers, config) {
+			scope.data.requests = data;
+		});
+		responsePromise.error(function(data, status, headers, config) {
+			//TODO (RV): ???
+		});
+	}
+</script>
+
+<body ng-app="myapp">
+	<div class="request_table_container" ng-controller="RequestsController">
+		<table class="table table-bordered table-hover">
+			<thead>
+				<tr>
+					<th>Date</th>
+					<th>Path</th>
+					<th>Remote address</th>
+					<th>Remote port</th>
+					<th>Browser</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="item in data.requests">
+					<th>{{item.datetime}}</th>
+					<th>{{item.url}}</th>
+					<th>{{item.remoteaddress}}</th>
+					<th>{{item.remoteport}}</th>
+					<th>{{item.useragent}}</th>
+				</tr>
+			</tbody>
+		</table>
+		<ul class="pager">
+			<li class="previous"><a href="#" ng-click="previousRequests()">← Older</a></li>
+			<li class="next"><a href="#" ng-click="nextRequests()">Newer →</a></li>
+		</ul>
+	</div>
+</body>
+
+</html>

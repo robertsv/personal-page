@@ -1,72 +1,75 @@
-var http = require("http");
-var url = require("url");
-var fs = require('fs');
-var indexFile;
-var robotFile;
-
+var express = require("express");
+var app = express();
 var databaseUrl = "robertsv_lv";
 var collections = [ "requests" ]
 var db = require("mongojs").connect(databaseUrl, collections);
 
+var auth = require("basic-auth-old")({
+	name : "Admin",
+	accounts : [ "XXX:XXX" ]
+}).auth;
+
 function start() {
 
-	fs.readFile('./index.html', function(err, data) {
-		if (err) {
-			throw err;
+	app.all("*", function(req, res, next) {
+		if(req.url.indexOf('requests.json') == -1) {
+			db.requests.save({
+				datetime : new Date(),
+				url : req.url,
+				remoteaddress : req.connection.remoteAddress,
+				remoteport : req.connection.remotePort,
+				useragent : req.headers["user-agent"]
+
+			}, function(err, saved) {
+
+			});
 		}
-		indexFile = data;
+		next();
 	});
 
-	fs.readFile('./robots.txt', function(err, data) {
-		if (err) {
-			throw err;
-		}
-		robotFile = data;
+	app.get("/", function(req, res) {
+		res.sendfile("index.html")
 	});
 
-	function onRequest(request, response) {
-		db.requests.save({
-			datetime : new Date(),
-			url : request.url,
-			remoteaddress : request.connection.remoteAddress,
-			remoteport : request.connection.remotePort,
-			useragent : request.headers['user-agent']
-			
-		}, function(err, saved) {
-			/*
-			if (err || !saved) {
-				console.log("Request url is not saved");
-			} else {
-				console.log("Request url is saved");
-			}
-			*/
+	app.get("/index.html", function(req, res) {
+		res.sendfile("index.html")
+	});
+
+	app.get("/admin.html", auth, function(req, res) {
+		res.sendfile("admin.html")
+	});
+
+	app.get("/robots.txt", function(req, res) {
+		res.sendfile("robots.txt")
+	});
+
+	app.get("/requests.json", auth, function(req, res) {
+		var allRequests = "[]";
+		var page = req.query.page;
+		var pageSize = 15;
+		req.method="NONE"; // TODO (RV): hack 
+		db.requests.find().skip(page * pageSize).limit(pageSize).toArray(function(err, items) {
+			res.status(200).json(items);
 		});
-		
-		var path = url.parse(request.url).pathname;
-		if (path == "/" || path == "/index.html") {
-			response.writeHead(200, {
-				"Content-Type" : "text/html;charset=utf-8"
-			});
-			response.write(indexFile);
-			response.end();
-		} else if (path == "/robots.txt") {
-			response.writeHead(200, {
-				"Content-Type" : "text/html;charset=utf-8"
-			});
-			response.write(robotFile);
-			response.end();
-		} else {
-			response.writeHead(404, {
-				"Content-Type" : "text/html;charset=utf-8"
-			});
-			response.write("Well ... it seems that there is nothing ...");
-			response.end();
+	});
+
+	app.get('*', function(req, res, next) {
+		var err = new Error();
+		err.status = 404;
+		next(err);
+	});
+
+	app.use(function(err, req, res, next) {
+		if (err.status !== 404) {
+			return next();
 		}
+		res.send("Well ...");
+	});
 
-	}
+	app.listen(8888, function() {
+		console.log("Listening...");
+	});
 
-	http.createServer(onRequest).listen(8080);
-	console.log("Server has started.");
 }
 
 exports.start = start;
