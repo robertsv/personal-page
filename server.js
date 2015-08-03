@@ -97,6 +97,7 @@ function start() {
 			return next();
 		}
 		res.send("Well ...");
+        console.log(err);
 	});
 	
 	
