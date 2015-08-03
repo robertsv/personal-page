@@ -32,10 +32,12 @@ function start() {
 	
 	
 	app.get("/", function(req, res) {
+        console.log(path.resolve("./index.html"));
 		res.sendfile(path.resolve("./index.html"));
 	});
 
 	app.get("/index.html", function(req, res) {
+        console.log(path.resolve("./index.html"));
 		res.sendfile(path.resolve("./index.html"));
 	});
 
