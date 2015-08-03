@@ -32,19 +32,19 @@ function start() {
 	
 	
 	app.get("/", function(req, res) {
-		res.sendfile(path.resolve("index.html"));
+		res.sendfile(path.resolve("/index.html"));
 	});
 
 	app.get("/index.html", function(req, res) {
-		res.sendfile(path.resolve("index.html"));
+		res.sendfile(path.resolve("/index.html"));
 	});
 
 	app.get("/admin.html", auth, function(req, res) {
-		res.sendfile(path.resolve("admin.html"));
+		res.sendfile(path.resolve("/admin.html"));
 	});
 	
 	app.get("/robots.txt", function(req, res) {
-		res.sendfile(path.resolve("robots.txt"));
+		res.sendfile(path.resolve("/robots.txt"));
 	});
 	
 	app.get("/requests.json", auth, function(req, res) {
@@ -59,27 +59,27 @@ function start() {
 	
 	app.get("/css/bootstrap.css", function(req, res) {
 		res.header("Content-Type", "text/css");
-		res.sendfile(path.resolve("css/bootstrap.css"));
+		res.sendfile(path.resolve("/css/bootstrap.css"));
 	});
 	
 	app.get("/css/bootstrap-theme.css", function(req, res) {
 		res.header("Content-Type", "text/css");
-		res.sendfile(path.resolve("css/bootstrap-theme.css"));
+		res.sendfile(path.resolve("/css/bootstrap-theme.css"));
 	});
 	
 	app.get("/js/angular.js", function(req, res) {
 		res.header("Content-Type", "text/javascript");
-		res.sendfile(path.resolve("js/angular.js"));
+		res.sendfile(path.resolve("/js/angular.js"));
 	});
 	
 	app.get("/js/bootstrap.js", function(req, res) {
 		res.header("Content-Type", "text/javascript");
-		res.sendfile(path.resolve("js/bootstrap.js"));
+		res.sendfile(path.resolve("/js/bootstrap.js"));
 	});
 	
 	app.get("/js/jquery.js", function(req, res) {
 		res.header("Content-Type", "text/javascript");
-		res.sendfile(path.resolve("js/jquery.js"));
+		res.sendfile(path.resolve("/js/jquery.js"));
 	});
 	
 	
