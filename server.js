@@ -29,7 +29,7 @@ function start() {
 	});
 	
 	app.use(express.static(__dirname + '/css'));   
-	app.use(express.static(__dirname + '/img')); 
+	
 	
 	app.get("/", function(req, res) {
 		res.sendfile(path.resolve("./index.html"));
@@ -81,6 +81,12 @@ function start() {
 		res.header("Content-Type", "text/javascript");
 		res.sendfile(path.resolve("./js/jquery.js"));
 	});
+
+	app.get("/img/GitHub-Mark.png", function(req, res) {
+		res.header("Content-Type", "image/png");
+		res.sendfile(path.resolve("./img/GitHub-Mark.png"));
+	});
+
 	
 	
 
@@ -102,7 +108,7 @@ function start() {
 	
 	
 
-	app.listen(8888, function() {
+	app.listen(8080, function() {
 		console.log("Listening...");
 	});
 
