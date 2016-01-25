@@ -29,7 +29,7 @@ function start() {
 	});
 	
 	app.use(express.static(__dirname + '/css'));   
-	
+	app.use(express.static(__dirname + '/img')); 
 	
 	app.get("/", function(req, res) {
 		res.sendfile(path.resolve("./index.html"));
