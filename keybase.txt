@@ -1,0 +1,56 @@
+==================================================================
+https://keybase.io/robertsvartins
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://github.com
+  * I am robertsvartins (https://keybase.io/robertsvartins) on keybase.
+  * I have a public key ASBAyGoO8VWVM_fmzfH5zhWpGmh3ezmhvoDymuL6YDiZOwo
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "012040c86a0ef1559533f7e6cdf1f9ce15a91a68777b39a1be80f29ae2fa6038993b0a",
+      "host": "keybase.io",
+      "kid": "012040c86a0ef1559533f7e6cdf1f9ce15a91a68777b39a1be80f29ae2fa6038993b0a",
+      "uid": "45540ca8107700bf5bca72e88aa9dd19",
+      "username": "robertsvartins"
+    },
+    "merkle_root": {
+      "ctime": 1527197450,
+      "hash": "1946b5b0d7d7671900ab6b2d7615bb6950f7ef86389b7dd1930a7861b40c9d829f341fedba7f297e8e70ea2901ea6c47c32579cfcb829045efbc07e05a81e9e0",
+      "hash_meta": "4ce1fdcb0411eaa0b83c70461b17564ea16c587e76f90088af31a9dba72938e4",
+      "seqno": 2901138
+    },
+    "service": {
+      "entropy": "+4TGNd9U8YU4gz9GPAxNd5ub",
+      "hostname": "github.com",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 2
+  },
+  "client": {
+    "name": "keybase.io go client",
+    "version": "1.0.48"
+  },
+  "ctime": 1527197559,
+  "expire_in": 504576000,
+  "prev": "c46550096da9fcbbac87990a0224f6f42686e15e0a1d8da2fbbd2048edbc8c04",
+  "seqno": 6,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEgQMhqDvFVlTP35s3x+c4VqRpod3s5ob6A8pri+mA4mTsKp3BheWxvYWTESpcCBsQgxGVQCW2p/Lush5kKAiT29CaG4V4KHY2i+70gSO28jATEIFV79vRjV3mqGpDAoIP9t/MFlvCDOqHj3F4s4drOIf0dAgHCo3NpZ8RAPeEHdXlhRUO4YE3HJ9gUZt3SbhD+oP7P/jhWp7EM0Ag9ZuoMXT0SQ8O63RxY8+5/YWQkBPEAQuEyG3GSIJsmDKhzaWdfdHlwZSCkaGFzaIKkdHlwZQildmFsdWXEIEMbOI25wwHzPIuBBaZq9Qu1XZS3e7BvlskkUsKJ7py3o3RhZ80CAqd2ZXJzaW9uAQ==
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/robertsvartins
+
+==================================================================
